@@ -16,12 +16,12 @@
         <div class="flex gap-10 lg:gap-20">
           <RouterLink
             to="/login"
-            class="px-5 py-2 rounded-lg bg-blue-500 text-white text-center sm:w-32 sm:px-6 sm:py-3 sm:text-xl lg:w-48 lg:px-8 lg:py-4 lg:text-2xl"
+            class="px-5 py-2 rounded-lg bg-blue-500 text-white text-center font-bold sm:w-32 sm:px-6 sm:py-3 sm:text-xl lg:w-48 lg:px-8 lg:py-4 lg:text-2xl"
             >Log In</RouterLink
           >
           <RouterLink
             to="/signup"
-            class="px-5 py-2 rounded-lg bg-blue-500 text-white text-center sm:w-32 sm:px-6 sm:py-3 sm:text-xl lg:w-48 lg:px-8 lg:py-4 lg:text-2xl"
+            class="px-5 py-2 rounded-lg bg-blue-500 text-white text-center font-bold sm:w-32 sm:px-6 sm:py-3 sm:text-xl lg:w-48 lg:px-8 lg:py-4 lg:text-2xl"
             >Sign Up</RouterLink
           >
         </div>
