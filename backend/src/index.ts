@@ -20,12 +20,7 @@ const bootstrapServer = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use("/graphql", expressMiddleware(server));
 
-  app.get("/", (req, res) => {
-    res.send("Hello world");
-  });
-
   app.listen(port, () => {
-    console.log(`Express ready at http://localhost:${port}`);
     console.log(`Express ready at http://localhost:${port}/graphql`);
   });
 };
