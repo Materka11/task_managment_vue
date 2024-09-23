@@ -1,11 +1,5 @@
 import { GraphQLResolveInfo } from "graphql";
-import {
-  getUser,
-  getUsers,
-  createUser,
-  GetUserArgs,
-  UserInput,
-} from "../services/user.service";
+import { getUser, getUsers, GetUserArgs } from "../services/user.service";
 
 export const usersResolver = {
   Query: {
@@ -26,11 +20,5 @@ export const usersResolver = {
       return await getUser({ id: args.id, info });
     },
   },
-  Mutation: {
-    async createUser(_: any, input: UserInput) {
-      return await createUser(input);
-    },
-    async updateUser() {},
-    async deleteUser() {},
-  },
+  Mutation: {},
 };

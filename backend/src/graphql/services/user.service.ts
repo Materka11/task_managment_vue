@@ -10,15 +10,6 @@ export interface GetUserArgs extends GetUsersArgs {
   id: string;
 }
 
-export interface UserInput {
-  input: {
-    email: string;
-    name: string;
-    surname: string;
-    occupation: string;
-  };
-}
-
 const prisma = new PrismaClient();
 
 export const getUsers = async ({ info }: GetUsersArgs) => {
@@ -27,12 +18,4 @@ export const getUsers = async ({ info }: GetUsersArgs) => {
 
 export const getUser = async ({ id, info }: GetUserArgs) => {
   return await prisma.user.findUnique({ where: { id } });
-};
-
-export const createUser = async ({ input }: UserInput) => {
-  const createdUser = await prisma.user.create({
-    data: input,
-  });
-
-  return createdUser;
 };
