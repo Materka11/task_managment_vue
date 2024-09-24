@@ -1,24 +1,41 @@
 import { GraphQLResolveInfo } from "graphql";
-import { getUser, getUsers, GetUserArgs } from "../services/user.service";
+import {
+  getUser,
+  getUsers,
+  IGetUserArgs,
+  IRegisterInput,
+  postRegister,
+} from "../services/user.service";
 
 export const usersResolver = {
   Query: {
-    async users(
+    users: async (
       _: any,
       args: Record<string, any>,
       context: any,
       info: GraphQLResolveInfo
-    ) {
-      return await getUsers({ info });
+    ) => {
+      await getUsers({ info });
     },
-    async user(
+    user: async (
       _: any,
-      args: GetUserArgs,
+      args: IGetUserArgs,
       context: any,
       info: GraphQLResolveInfo
-    ) {
-      return await getUser({ id: args.id, info });
+    ) => {
+      await getUser({ id: args.id, info });
+    },
+    refreshToken: () => {},
+    login: () => {},
+  },
+  Mutation: {
+    register: async (
+      _: any,
+      args: IRegisterInput,
+      { req }: any,
+      info: GraphQLResolveInfo
+    ) => {
+      await postRegister(args);
     },
   },
-  Mutation: {},
 };
