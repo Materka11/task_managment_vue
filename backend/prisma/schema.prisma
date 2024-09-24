@@ -19,6 +19,7 @@ model User {
   name       String
   surname    String
   occupation String
+  password   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   auth       Auth?
