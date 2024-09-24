@@ -4,10 +4,11 @@ import dotenv from "dotenv";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { typeDefs, resolvers } from "./graphql";
+import env from "./graphql/utils/validateEnv";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = env.PORT || 3000;
 
 const bootstrapServer = async () => {
   const server = new ApolloServer({
