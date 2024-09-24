@@ -6,6 +6,7 @@ type User {
   name: String!
   surname: String!
   occupation: String!
+  password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
