@@ -14,17 +14,15 @@ export const usersResolver = {
       args: Record<string, any>,
       context: any,
       info: GraphQLResolveInfo
-    ) => {
-      await getUsers({ info });
-    },
+    ) => await getUsers({ info }),
+
     user: async (
       _: any,
       args: IGetUserArgs,
       context: any,
       info: GraphQLResolveInfo
-    ) => {
-      await getUser({ id: args.id, info });
-    },
+    ) => await getUser({ id: args.id, info }),
+
     refreshToken: () => {},
     login: () => {},
   },
@@ -34,8 +32,6 @@ export const usersResolver = {
       args: IRegisterInput,
       { req }: any,
       info: GraphQLResolveInfo
-    ) => {
-      await postRegister(args);
-    },
+    ) => await postRegister(args),
   },
 };
