@@ -67,6 +67,13 @@ export const postRegister = async ({ input }: IRegisterInput) => {
 
   let tokens = await issueTokens(newUser);
 
+  await prisma.auth.create({
+    data: {
+      userId: newUser.id,
+      ...tokens,
+    },
+  });
+
   const auth: IAuth = { userId: newUser.id, user: newUser, ...tokens };
 
   return auth;
