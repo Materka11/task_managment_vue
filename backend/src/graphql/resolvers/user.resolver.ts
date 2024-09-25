@@ -3,8 +3,10 @@ import {
   getUser,
   getUsers,
   IGetUserArgs,
+  ILoginArgs,
   IRegisterInput,
-  postRegister,
+  login,
+  registration,
 } from "../services/user.service";
 
 export const usersResolver = {
@@ -24,14 +26,19 @@ export const usersResolver = {
     ) => await getUser({ id: args.id, info }),
 
     refreshToken: () => {},
-    login: () => {},
+    login: async (
+      _: any,
+      args: ILoginArgs,
+      context: any,
+      info: GraphQLResolveInfo
+    ) => await login(args),
   },
   Mutation: {
     register: async (
       _: any,
       args: IRegisterInput,
-      { req }: any,
+      context: any,
       info: GraphQLResolveInfo
-    ) => await postRegister(args),
+    ) => await registration(args),
   },
 };

@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { extractSelection } from "../utils/extractSelections";
 import { GraphQLResolveInfo } from "graphql";
-import { registerValidation } from "../utils/userValidators";
+import { loginValidation, registerValidation } from "../utils/userValidators";
 import bcrypt from "bcryptjs";
 import { issueTokens } from "../utils/auth";
 
@@ -42,6 +42,11 @@ export interface IAuth {
   refreshToken: string;
 }
 
+export interface ILoginArgs {
+  email: string;
+  password: string;
+}
+
 const prisma = new PrismaClient();
 
 export const getUsers = async ({ info }: IGetUsersArgs) => {
@@ -52,7 +57,7 @@ export const getUser = async ({ id, info }: IGetUserArgs) => {
   return await prisma.user.findUnique({ where: { id } });
 };
 
-export const postRegister = async ({ input }: IRegisterInput) => {
+export const registration = async ({ input }: IRegisterInput) => {
   await registerValidation.validateAsync(input, { abortEarly: true });
 
   const email = input.email;
@@ -75,6 +80,29 @@ export const postRegister = async ({ input }: IRegisterInput) => {
   });
 
   const auth: IAuth = { userId: newUser.id, user: newUser, ...tokens };
+
+  return auth;
+};
+
+export const login = async (args: ILoginArgs) => {
+  await loginValidation.validateAsync(args, { abortEarly: true });
+
+  const email = args.email;
+  let user = await prisma.user.findUnique({ where: { email } });
+
+  if (!user) {
+    throw new Error("Username not found");
+  }
+
+  let isMatch = await bcrypt.compare(args.password, user.password);
+
+  if (!isMatch) {
+    throw new Error("Invalid password");
+  }
+
+  let tokens = await issueTokens(user);
+
+  const auth: IAuth = { userId: user.id, user, ...tokens };
 
   return auth;
 };
