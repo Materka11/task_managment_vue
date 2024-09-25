@@ -19,7 +19,12 @@ const bootstrapServer = async () => {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use("/graphql", expressMiddleware(server));
+  app.use(
+    "/graphql",
+    expressMiddleware(server, {
+      context: async ({ req }) => ({ req }),
+    })
+  );
 
   app.listen(port, () => {
     console.log(`Express ready at http://localhost:${port}/graphql`);
