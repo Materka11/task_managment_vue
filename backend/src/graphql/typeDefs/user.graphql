@@ -31,6 +31,7 @@ type Query {
   users: [User]
   refreshToken: Auth!
   login(email: String!, password: String!): Auth!
+  profile: User
 }
 
 type Mutation {
