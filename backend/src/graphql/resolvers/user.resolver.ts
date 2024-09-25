@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from "graphql";
 import {
+  getProfile,
   getUser,
   getUsers,
   IGetUserArgs,
@@ -32,6 +33,12 @@ export const usersResolver = {
       context: any,
       info: GraphQLResolveInfo
     ) => await login(args),
+    profile: async (
+      _: any,
+      args: ILoginArgs,
+      { req }: any,
+      info: GraphQLResolveInfo
+    ) => await getProfile(req),
   },
   Mutation: {
     register: async (
