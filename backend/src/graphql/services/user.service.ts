@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 import { getAuthUser, getRefreshTokenUser, issueTokens } from "../utils/auth";
 
 export interface IGetUsersArgs {
-  info: GraphQLResolveInfo;
+  req: any;
 }
 
 export interface IGetUserArgs extends IGetUsersArgs {
@@ -49,11 +49,19 @@ export interface ILoginArgs {
 
 const prisma = new PrismaClient();
 
-export const getUsers = async ({ info }: IGetUsersArgs) => {
+export const getUsers = async ({ req }: IGetUsersArgs) => {
+  const authUser = await getAuthUser(req, true);
+  if (!authUser) {
+    return null;
+  }
   return await prisma.user.findMany();
 };
 
-export const getUser = async ({ id, info }: IGetUserArgs) => {
+export const getUser = async ({ id, req }: IGetUserArgs) => {
+  const authUser = await getAuthUser(req, true);
+  if (!authUser) {
+    return null;
+  }
   return await prisma.user.findUnique({ where: { id } });
 };
 

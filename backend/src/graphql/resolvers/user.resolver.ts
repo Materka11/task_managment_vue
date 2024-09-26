@@ -16,16 +16,16 @@ export const usersResolver = {
     users: async (
       _: any,
       args: Record<string, any>,
-      context: any,
+      { req }: any,
       info: GraphQLResolveInfo
-    ) => await getUsers({ info }),
+    ) => await getUsers({ req }),
 
     user: async (
       _: any,
       args: IGetUserArgs,
-      context: any,
+      { req }: any,
       info: GraphQLResolveInfo
-    ) => await getUser({ id: args.id, info }),
+    ) => await getUser({ id: args.id, req }),
 
     refreshToken: async (
       _: any,
@@ -36,7 +36,7 @@ export const usersResolver = {
     login: async (
       _: any,
       args: ILoginArgs,
-      context: any,
+      { req }: any,
       info: GraphQLResolveInfo
     ) => await login(args),
     me: async (
@@ -50,7 +50,7 @@ export const usersResolver = {
     register: async (
       _: any,
       args: IRegisterInput,
-      context: any,
+      { req }: any,
       info: GraphQLResolveInfo
     ) => await registration(args),
   },
