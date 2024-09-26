@@ -14,9 +14,20 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  email String @unique
-  name String 
-  surname String
+  id         String   @id @default(uuid())
+  email      String   @unique
+  name       String
+  surname    String
   occupation String
+  password   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  auth       Auth?
+}
+
+model Auth {
+  user         User   @relation(fields: [userId], references: [id])
+  userId       String @unique
+  token        String @unique
+  refreshToken String @unique
 }

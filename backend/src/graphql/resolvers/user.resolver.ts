@@ -1,36 +1,57 @@
 import { GraphQLResolveInfo } from "graphql";
 import {
+  getMe,
+  getRefreshToken,
   getUser,
   getUsers,
-  createUser,
-  GetUserArgs,
-  UserInput,
+  IGetUserArgs,
+  ILoginArgs,
+  IRegisterInput,
+  login,
+  registration,
 } from "../services/user.service";
 
 export const usersResolver = {
   Query: {
-    async users(
+    users: async (
       _: any,
       args: Record<string, any>,
-      context: any,
+      { req }: any,
       info: GraphQLResolveInfo
-    ) {
-      return await getUsers({ info });
-    },
-    async user(
+    ) => await getUsers({ req }),
+
+    user: async (
       _: any,
-      args: GetUserArgs,
-      context: any,
+      args: IGetUserArgs,
+      { req }: any,
       info: GraphQLResolveInfo
-    ) {
-      return await getUser({ id: args.id, info });
-    },
+    ) => await getUser({ id: args.id, req }),
+
+    refreshToken: async (
+      _: any,
+      args: ILoginArgs,
+      { req }: any,
+      info: GraphQLResolveInfo
+    ) => await getRefreshToken(req),
+    login: async (
+      _: any,
+      args: ILoginArgs,
+      { req }: any,
+      info: GraphQLResolveInfo
+    ) => await login(args),
+    me: async (
+      _: any,
+      args: ILoginArgs,
+      { req }: any,
+      info: GraphQLResolveInfo
+    ) => await getMe(req),
   },
   Mutation: {
-    async createUser(_: any, input: UserInput) {
-      return await createUser(input);
-    },
-    async updateUser() {},
-    async deleteUser() {},
+    register: async (
+      _: any,
+      args: IRegisterInput,
+      { req }: any,
+      info: GraphQLResolveInfo
+    ) => await registration(args),
   },
 };

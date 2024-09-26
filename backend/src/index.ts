@@ -4,10 +4,11 @@ import dotenv from "dotenv";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { typeDefs, resolvers } from "./graphql";
+import env from "./graphql/utils/validateEnv";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = env.PORT || 3000;
 
 const bootstrapServer = async () => {
   const server = new ApolloServer({
@@ -18,14 +19,14 @@ const bootstrapServer = async () => {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use("/graphql", expressMiddleware(server));
-
-  app.get("/", (req, res) => {
-    res.send("Hello world");
-  });
+  app.use(
+    "/graphql",
+    expressMiddleware(server, {
+      context: async ({ req }) => ({ req }),
+    })
+  );
 
   app.listen(port, () => {
-    console.log(`Express ready at http://localhost:${port}`);
     console.log(`Express ready at http://localhost:${port}/graphql`);
   });
 };

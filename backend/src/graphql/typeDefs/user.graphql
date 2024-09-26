@@ -1,9 +1,21 @@
+scalar DateTime
+
 type User {
   id: String!
   email: String!
   name: String!
   surname: String!
   occupation: String!
+  password: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Auth {
+  userId: String!
+  user: User!
+  token: String!
+  refreshToken: String!
 }
 
 input UserInput {
@@ -11,15 +23,17 @@ input UserInput {
   name: String!
   surname: String!
   occupation: String!
+  password: String!
 }
 
 type Query {
   user(id: String!): User
   users: [User]
+  refreshToken: Auth!
+  login(email: String!, password: String!): Auth!
+  me: User
 }
 
 type Mutation {
-  createUser(input: UserInput!): User
-  updateUser(input: UserInput!): User
-  deleteUser(id: String!): User
+  register(input: UserInput): Auth!
 }
