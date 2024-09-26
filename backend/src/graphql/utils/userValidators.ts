@@ -15,12 +15,12 @@ const password = Joi.string()
       "Must have at least one lowercase letter, one uppercase letter and one digit",
   });
 
-export const loginValidation = Joi.object({
+export const loginRules = Joi.object().keys({
   email,
   password,
 });
 
-export const registerValidation = Joi.object({
+export const registerRules = Joi.object().keys({
   email,
   name,
   surname,

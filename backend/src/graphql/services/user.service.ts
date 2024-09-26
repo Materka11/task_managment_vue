@@ -1,9 +1,8 @@
 import { PrismaClient } from "@prisma/client";
-import { extractSelection } from "../utils/extractSelections";
-import { GraphQLResolveInfo } from "graphql";
-import { loginValidation, registerValidation } from "../utils/userValidators";
+import { loginRules, registerRules } from "../utils/userValidators";
 import bcrypt from "bcryptjs";
 import { getAuthUser, getRefreshTokenUser, issueTokens } from "../utils/auth";
+import Joi from "@hapi/joi";
 
 export interface IGetUsersArgs {
   req: any;
@@ -66,7 +65,7 @@ export const getUser = async ({ id, req }: IGetUserArgs) => {
 };
 
 export const registration = async ({ input }: IRegisterInput) => {
-  await registerValidation.validateAsync(input, { abortEarly: true });
+  await Joi.assert(input, registerRules, { abortEarly: false });
 
   const email = input.email;
   let user = await prisma.user.findUnique({ where: { email } });
@@ -93,7 +92,7 @@ export const registration = async ({ input }: IRegisterInput) => {
 };
 
 export const login = async (args: ILoginArgs) => {
-  await loginValidation.validateAsync(args, { abortEarly: true });
+  await Joi.assert(args, loginRules, { abortEarly: false });
 
   const email = args.email;
   let user = await prisma.user.findUnique({ where: { email } });
