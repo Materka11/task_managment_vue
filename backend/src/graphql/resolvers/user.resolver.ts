@@ -1,6 +1,7 @@
 import { GraphQLResolveInfo } from "graphql";
 import {
-  getProfile,
+  getMe,
+  getRefreshToken,
   getUser,
   getUsers,
   IGetUserArgs,
@@ -26,19 +27,24 @@ export const usersResolver = {
       info: GraphQLResolveInfo
     ) => await getUser({ id: args.id, info }),
 
-    refreshToken: () => {},
+    refreshToken: async (
+      _: any,
+      args: ILoginArgs,
+      { req }: any,
+      info: GraphQLResolveInfo
+    ) => await getRefreshToken(req),
     login: async (
       _: any,
       args: ILoginArgs,
       context: any,
       info: GraphQLResolveInfo
     ) => await login(args),
-    profile: async (
+    me: async (
       _: any,
       args: ILoginArgs,
       { req }: any,
       info: GraphQLResolveInfo
-    ) => await getProfile(req),
+    ) => await getMe(req),
   },
   Mutation: {
     register: async (

@@ -3,7 +3,7 @@ import { extractSelection } from "../utils/extractSelections";
 import { GraphQLResolveInfo } from "graphql";
 import { loginValidation, registerValidation } from "../utils/userValidators";
 import bcrypt from "bcryptjs";
-import { getAuthUser, issueTokens } from "../utils/auth";
+import { getAuthUser, getRefreshTokenUser, issueTokens } from "../utils/auth";
 
 export interface IGetUsersArgs {
   info: GraphQLResolveInfo;
@@ -107,4 +107,20 @@ export const login = async (args: ILoginArgs) => {
   return auth;
 };
 
-export const getProfile = async (req: any) => await getAuthUser(req, true);
+export const getMe = async (req: any) => await getAuthUser(req, true);
+
+export const getRefreshToken = async (req: any) => {
+  const authUser = await getRefreshTokenUser(req);
+
+  if (authUser) {
+    const tokens = await issueTokens(authUser);
+
+    return {
+      userId: authUser.id,
+      user: authUser,
+      ...tokens,
+    };
+  }
+
+  return null;
+};

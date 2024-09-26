@@ -60,3 +60,24 @@ export const getAuthUser = async (request: any, requiresAuth = false) => {
 
   return null;
 };
+
+export const getRefreshTokenUser = async (request: any) => {
+  const header = request.headers.refresh_token;
+
+  if (header) {
+    const token = jwt.verify(header, env.APP_REFRESH_SECRET) as IToken;
+    const id = token.id;
+
+    let authUser = await prisma.user.findUnique({ where: { id } });
+
+    if (!authUser) {
+      throw new AuthenticationError(
+        "Invalid refresh token, User Authentication failed"
+      );
+    }
+
+    return authUser;
+  }
+
+  return null;
+};
