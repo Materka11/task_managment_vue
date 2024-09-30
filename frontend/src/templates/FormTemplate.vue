@@ -1,17 +1,11 @@
 <script setup lang="ts">
-import SubmitButton from "@/components/SubmitButton.vue"
-
 const {
   title,
   subtitle,
-  buttonText,
-  infoText,
   isImg = true
 } = defineProps<{
   title: string
   subtitle: string
-  buttonText: string
-  infoText: [string, string, string]
   isImg?: boolean
 }>()
 
@@ -39,13 +33,6 @@ const mainStyles = isImg ? "h-screen flex" : "flex"
         </div>
         <form class="flex flex-col gap-6">
           <slot></slot>
-          <div class="flex flex-col justify-center items-center gap-4">
-            <SubmitButton :label="buttonText" />
-            <span
-              >{{ infoText[0] }}
-              <RouterLink :to="infoText[1]" class="font-bold">{{ infoText[2] }}</RouterLink></span
-            >
-          </div>
         </form>
       </div>
     </div>

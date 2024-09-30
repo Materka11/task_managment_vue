@@ -1,18 +1,11 @@
 <script setup lang="ts">
 import InputForm from "@/components/InputForm.vue"
 import FormTemplate from "@/templates/FormTemplate.vue"
-
-const INFO_TEXT: [string, string, string] = ["Do you have account?", "/login", "Login Now"]
+import SubmitButton from "@/components/SubmitButton.vue"
 </script>
 
 <template>
-  <FormTemplate
-    title="Welcome"
-    subtitle="Sign Up with Email"
-    button-text="Sign Up"
-    :info-text="INFO_TEXT"
-    :is-img="false"
-  >
+  <FormTemplate title="Welcome" subtitle="Sign Up with Email" :is-img="false">
     <InputForm id="name" label="Name" :required="true" type="text" />
     <InputForm id="surname" label="Surname" :required="true" type="text" />
     <InputForm id="email" label="Email" :required="true" type="email" />
@@ -25,5 +18,11 @@ const INFO_TEXT: [string, string, string] = ["Do you have account?", "/login", "
       type="password"
       minlength="8"
     />
+    <div class="flex flex-col justify-center items-center gap-4">
+      <SubmitButton label="Sign Up" />
+      <span
+        >Do you have account? <RouterLink to="/login" class="font-bold">Login Now</RouterLink></span
+      >
+    </div>
   </FormTemplate>
 </template>
