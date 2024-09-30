@@ -31,9 +31,7 @@ const mainStyles = isImg ? "h-screen flex" : "flex"
           <h1 class="text-5xl text-blue-400 font-bold text-center lg:text-7xl">{{ title }}</h1>
           <h2 class="text-xl text-gray-500 text-center lg:text-2xl">{{ subtitle }}</h2>
         </div>
-        <form class="flex flex-col gap-6">
-          <slot></slot>
-        </form>
+        <slot></slot>
       </div>
     </div>
   </main>
