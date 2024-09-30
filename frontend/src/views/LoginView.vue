@@ -7,8 +7,15 @@ import SubmitButton from "@/components/SubmitButton.vue"
 <template>
   <FormTemplate title="Welcome" subtitle="Login with Email">
     <form class="flex flex-col gap-6">
-      <InputForm id="email" label="Email" :required="true" type="email" />
-      <InputForm id="password" label="Password" :is-password="true" />
+      <!-- <InputForm id="email" label="Email" :required="true" type="email" /> -->
+      <!-- <InputForm id="password" label="Password" :is-password="true" ><input
+      :id="id"
+      class="border-2 border-blue-400 rounded-lg h-12 px-4 outline-none leading-10"
+      type="password"
+      required
+      minlength="8"
+      v-model="value"
+    /></InputForm> -->
       <div class="flex flex-col justify-center items-center gap-4">
         <SubmitButton label="Log In" />
         <span
