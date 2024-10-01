@@ -5,6 +5,7 @@ import SubmitButton from "@/components/SubmitButton.vue"
 import { ref } from "vue"
 import gql from "graphql-tag"
 import { useMutation } from "@vue/apollo-composable"
+import router from "@/router"
 
 const REGISTER_MUTATION = gql`
   mutation Register($formData: UserInput) {
@@ -60,6 +61,8 @@ const handleSubmit = () => {
     .catch((error) => {
       console.error("Registration error:", error)
     })
+
+  onDone(() => router.push("/login"))
 }
 </script>
 
