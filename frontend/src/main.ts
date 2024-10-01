@@ -4,6 +4,8 @@ import router from "./router"
 import "./assets/main.css"
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client/core"
 import { DefaultApolloClient } from "@vue/apollo-composable"
+import Vue3Toastify, { type ToastContainerOptions } from "vue3-toastify"
+import "vue3-toastify/dist/index.css"
 
 const httpLink = createHttpLink({
   uri: "http://localhost:3000/graphql"
@@ -25,5 +27,6 @@ const app = createApp({
 })
 
 app.use(router)
+app.use(Vue3Toastify, {} as ToastContainerOptions)
 
 app.mount("#app")
