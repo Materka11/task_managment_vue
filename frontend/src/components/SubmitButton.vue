@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { RouteLocationRaw } from "vue-router"
+import LoadingSpinner from "./LoadingSpinner.vue"
 
 const {
   isLink = false,
@@ -11,6 +12,7 @@ const {
   isPrimary?: boolean
   label: string
   link?: string | RouteLocationRaw
+  loading?: boolean
 }>()
 
 if (isLink && !link) {
@@ -24,5 +26,9 @@ const styles = isPrimary
 
 <template>
   <RouterLink v-if="isLink && link" :to="link" :class="styles">{{ label }}</RouterLink>
-  <button v-else :class="styles">{{ label }}</button>
+
+  <button v-else :class="styles">
+    <LoadingSpinner v-if="loading" :loading="loading" />
+    <span v-else>{{ label }}</span>
+  </button>
 </template>

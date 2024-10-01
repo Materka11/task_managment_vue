@@ -119,7 +119,7 @@ const handleSubmit = () => {
       <span v-if="errorMessage" class="text-red-500">{{ errorMessage }}</span>
       <span v-if="error" class="text-red-500">{{ error.message }}</span>
       <div class="flex flex-col justify-center items-center gap-4">
-        <SubmitButton label="Sign Up" />
+        <SubmitButton label="Sign Up" :loading="loading" />
         <span
           >Do you have account?
           <RouterLink to="/login" class="font-bold">Login Now</RouterLink></span
