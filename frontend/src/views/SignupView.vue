@@ -6,6 +6,7 @@ import { ref } from "vue"
 import gql from "graphql-tag"
 import { useMutation } from "@vue/apollo-composable"
 import router from "@/router"
+import { toast } from "vue3-toastify"
 
 const REGISTER_MUTATION = gql`
   mutation Register($formData: UserInput) {
@@ -60,9 +61,10 @@ const handleSubmit = () => {
     })
     .catch((error) => {
       console.error("Registration error:", error)
+      toast.error("Register failed")
     })
 
-  onDone(() => router.push("/login"))
+  onDone(() => router.push({ path: "/login", query: { register: "success" } }))
 }
 </script>
 

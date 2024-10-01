@@ -2,6 +2,17 @@
 import InputForm from "@/components/InputForm.vue"
 import FormTemplate from "@/templates/FormTemplate.vue"
 import SubmitButton from "@/components/SubmitButton.vue"
+import { useRoute } from "vue-router"
+import { toast } from "vue3-toastify"
+import { onMounted } from "vue"
+
+const route = useRoute()
+
+onMounted(() => {
+  if (route.query.register === "success") {
+    toast.success("Register success")
+  }
+})
 </script>
 
 <template>
