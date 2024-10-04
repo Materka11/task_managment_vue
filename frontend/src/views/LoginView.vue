@@ -4,9 +4,10 @@ import FormTemplate from "@/templates/FormTemplate.vue"
 import SubmitButton from "@/components/SubmitButton.vue"
 import { useRoute } from "vue-router"
 import { toast } from "vue3-toastify"
-import { onMounted, ref } from "vue"
+import { inject, onMounted, ref } from "vue"
 import gql from "graphql-tag"
 import { useLazyQuery } from "@vue/apollo-composable"
+import type { VueCookies } from "vue-cookies"
 
 const LOGIN_QUERY = gql`
   query Login($email: String!, $password: String!) {
@@ -32,6 +33,8 @@ const formData = ref({
 
 const route = useRoute()
 
+const $cookies = inject<VueCookies>("$cookies")
+
 const { load: login, loading } = useLazyQuery(LOGIN_QUERY, {
   email: formData.value.email,
   password: formData.value.password
@@ -50,7 +53,9 @@ const handleSubmit = async () => {
       password: formData.value.password
     })
 
-    console.log(data)
+    $cookies?.set("Authorization", data.token, "2h")
+    $cookies?.set("Refresh_token", data.refreshToken, "1d")
+    toast.success("Login successs")
   } catch (e) {
     console.error(e)
     toast.error("Login failed")
