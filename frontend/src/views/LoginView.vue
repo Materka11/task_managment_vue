@@ -84,8 +84,9 @@ const handleSubmit = async () => {
           minlength="8"
           v-model="formData.password"
       /></InputForm>
+
       <div class="flex flex-col justify-center items-center gap-4">
-        <SubmitButton label="Log In" />
+        <SubmitButton label="Log In" :loading="loading" />
         <span
           >Don't have account?
           <RouterLink to="/signup" class="font-bold">Register Now</RouterLink></span
