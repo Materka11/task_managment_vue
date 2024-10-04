@@ -35,7 +35,11 @@ const route = useRoute()
 
 const $cookies = inject<VueCookies>("$cookies")
 
-const { load: login, loading } = useLazyQuery(LOGIN_QUERY, {
+const {
+  load: login,
+  loading,
+  error
+} = useLazyQuery(LOGIN_QUERY, {
   email: formData.value.email,
   password: formData.value.password
 })
@@ -84,7 +88,7 @@ const handleSubmit = async () => {
           minlength="8"
           v-model="formData.password"
       /></InputForm>
-
+      <span v-if="error" class="text-red-500">{{ error.message }}</span>
       <div class="flex flex-col justify-center items-center gap-4">
         <SubmitButton label="Log In" :loading="loading" />
         <span
