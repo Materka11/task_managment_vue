@@ -1,5 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import NavDashboard from "@/components/NavDashboard.vue"
+</script>
 
 <template>
-  <h1>Hello World</h1>
+  <NavDashboard />
 </template>
