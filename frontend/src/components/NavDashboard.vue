@@ -1,5 +1,5 @@
 <script setup lang="ts"></script>
 
 <template>
-  <nav></nav>
+  <nav class="flex"></nav>
 </template>
