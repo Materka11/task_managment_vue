@@ -42,5 +42,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <NavDashboard />
+  <main class="d-flex flex-col bg-blue-100 min-h-screen">
+    <NavDashboard />
+  </main>
 </template>
