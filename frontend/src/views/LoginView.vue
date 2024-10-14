@@ -2,7 +2,7 @@
 import InputForm from "@/components/InputForm.vue"
 import FormTemplate from "@/templates/FormTemplate.vue"
 import SubmitButton from "@/components/SubmitButton.vue"
-import { useRoute } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import { toast } from "vue3-toastify"
 import { inject, onMounted, ref } from "vue"
 import gql from "graphql-tag"
@@ -32,6 +32,7 @@ const formData = ref({
 })
 
 const route = useRoute()
+const router = useRouter()
 
 const $cookies = inject<VueCookies>("$cookies")
 
@@ -59,7 +60,7 @@ const handleSubmit = async () => {
 
     $cookies?.set("Authorization", data.token, "2h")
     $cookies?.set("Refresh_token", data.refreshToken, "1d")
-    toast.success("Login successs")
+    router.push({ path: "/dashboard", query: { login: "success" } })
   } catch (e) {
     console.error(e)
     toast.error("Login failed")
