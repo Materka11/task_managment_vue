@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
-  <h1>Projectam</h1>
+  <h1 class="text-2xl text-blue-500 font-bold">Projectam</h1>
 </template>
