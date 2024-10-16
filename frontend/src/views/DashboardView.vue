@@ -47,24 +47,21 @@ const {
         Authorization: token || ""
       }
     },
-    fetchPolicy: "network-only"
+    fetchPolicy: "cache-and-network"
   }
 )
 if (error.value) {
+  toast.error(`GraphQL Error: ${error.value.message}`)
   console.error("GraphQL Error:", error.value)
 }
 
-watch(loading, (isLoading) => {
-  if (!isLoading) {
-    user.value = meData.value
+watch([loading, meData], ([isLoading, data]) => {
+  if (!isLoading && data?.me) {
+    user.value = data.me
   }
 })
 
-console.log(user.value)
-
 onMounted(async () => {
-  console.log("Loading:", loading.value)
-  console.log("meData onMounted:", meData.value)
   if (route.query.login === "success") {
     toast.success("Login success")
     setTimeout(() => history.replaceState({}, "", route.path), 5000)
@@ -75,9 +72,7 @@ onMounted(async () => {
 <template>
   <main class="d-flex flex-col bg-blue-100 min-h-screen">
     <LoadingSpinner v-if="loading" :loading="loading" />
-
-    <NavDashboard v-else-if="meData?.value" :meData="meData.value" />
-
+    <NavDashboard v-else-if="user" :user="user" />
     <p v-else class="text-red-500 text-center">{{ error?.message }}</p>
   </main>
 </template>

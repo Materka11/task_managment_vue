@@ -17,6 +17,6 @@ import SubmitButton from "./SubmitButton.vue"
       required
     />
 
-    <SubmitButton label="Search" styles="lg:w-0 lg:px-12 h-8 absolute right-3 lg:text-base" />
+    <SubmitButton label="Search" styles="lg:w-20 lg:px-12 h-8 absolute right-3 lg:text-base" />
   </form>
 </template>
