@@ -5,17 +5,26 @@ import AddButton from "./AddButton.vue"
 import ActionButton from "./ActionButton.vue"
 import BellSVG from "@/assets/icons/BellSVG.vue"
 import ShortProfile from "./ShortProfile.vue"
+import { ref } from "vue"
+import HamburgerButton from "./HamburgerButton.vue"
 
 const { user } = defineProps<{ user: IUser | null }>()
+const isMenuOpen = ref(false)
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value
+}
 </script>
 
 <template>
-  <nav class="flex bg-white justify-between px-20 h-20">
+  <nav class="flex bg-white justify-between px-5 xl:px-20 h-20">
     <div class="flex flex-row h-full w-full justify-between gap-5 items-center">
       <Logo />
       <SearchInput />
+      <HamburgerButton :is-menu-open="isMenuOpen" :toggleMenu="toggleMenu" />
     </div>
-    <div class="flex flex-row h-full w-full justify-end gap-10 items-center">
+
+    <div class="hidden md:flex flex-row h-full w-full justify-end gap-5 items-center">
       <AddButton label="Create Task" :handle-click="() => {}" />
       <ActionButton :handle-click="() => {}"><BellSVG /></ActionButton>
       <ShortProfile
@@ -24,6 +33,25 @@ const { user } = defineProps<{ user: IUser | null }>()
         :surname="user?.surname"
         :occupation="user?.occupation"
       />
+    </div>
+
+    <div
+      v-if="isMenuOpen"
+      class="absolute top-0 right-0 bg-white w-full h-screen flex flex-col p-5 md:hidden gap-5"
+    >
+      <div class="flex justify-between w-full">
+        <ShortProfile
+          v-if="user"
+          :name="user?.name"
+          :surname="user?.surname"
+          :occupation="user?.occupation"
+        />
+        <HamburgerButton :is-menu-open="isMenuOpen" :toggleMenu="toggleMenu" />
+      </div>
+      <AddButton label="Create Task" :handle-click="() => {}" />
+      <ActionButton :handle-click="() => {}"
+        ><BellSVG /> <span class="font-bold">Notification</span></ActionButton
+      >
     </div>
   </nav>
 </template>
