@@ -7,10 +7,11 @@ import BellSVG from "@/assets/icons/BellSVG.vue"
 import ShortProfile from "./ShortProfile.vue"
 import { ref } from "vue"
 import HamburgerButton from "./HamburgerButton.vue"
-import PathLink from "./PathLink.vue"
+import ButtonOrLink from "./ButtonOrLink.vue"
 import HomeSVG from "@/assets/icons/HomeSVG.vue"
 import MessageSVG from "@/assets/icons/MessageSVG.vue"
 import NotepadSVG from "@/assets/icons/NotepadSVG.vue"
+import PlusCircleFillSVG from "@/assets/icons/PlusCircleFillSVG.vue"
 
 const { user } = defineProps<{ user: IUser | null }>()
 const isMenuOpen = ref(false)
@@ -53,18 +54,21 @@ const toggleMenu = () => {
         <HamburgerButton :is-menu-open="isMenuOpen" :toggleMenu="toggleMenu" />
       </div>
       <div class="flex flex-col gap-10 w-full py-10">
-        <section class="flex flex-col gap-2 w-full">
-          <AddButton label="Create Task" :handle-click="() => {}" />
-          <ActionButton :handle-click="() => {}"
-            ><BellSVG /> <span class="font-bold">Notification</span></ActionButton
-          >
-        </section>
         <section class="flex flex-col gap-4 w-full">
-          <PathLink label="Home" href="/home"><HomeSVG /></PathLink>
-          <PathLink label="Message" href="/message"
+          <ButtonOrLink label="Create Task" :handle-click="() => {}" type="button"
+            ><PlusCircleFillSVG
+          /></ButtonOrLink>
+          <ButtonOrLink label="Notification" :handle-click="() => {}" type="button"
+            ><BellSVG />
+          </ButtonOrLink>
+        </section>
+        <hr class="border-2" />
+        <section class="flex flex-col gap-4 w-full">
+          <ButtonOrLink label="Home" href="/home" type="a"><HomeSVG /></ButtonOrLink>
+          <ButtonOrLink label="Message" href="/message" type="a"
             ><MessageSVG class="stroke-gray-500 group-hover:stroke-blue-500"
-          /></PathLink>
-          <PathLink label="Activities" href="/activities"><NotepadSVG /></PathLink>
+          /></ButtonOrLink>
+          <ButtonOrLink label="Activities" href="/activities" type="a"><NotepadSVG /></ButtonOrLink>
         </section>
         <hr class="border-2" />
       </div>
