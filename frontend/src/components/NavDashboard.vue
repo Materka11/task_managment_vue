@@ -12,6 +12,7 @@ import HomeSVG from "@/assets/icons/HomeSVG.vue"
 import MessageSVG from "@/assets/icons/MessageSVG.vue"
 import NotepadSVG from "@/assets/icons/NotepadSVG.vue"
 import PlusCircleFillSVG from "@/assets/icons/PlusCircleFillSVG.vue"
+import TaskSVG from "@/assets/icons/TaskSVG.vue"
 
 const { user } = defineProps<{ user: IUser | null }>()
 const isMenuOpen = ref(false)
@@ -69,6 +70,10 @@ const toggleMenu = () => {
             ><MessageSVG class="stroke-gray-500 group-hover:stroke-blue-500"
           /></ButtonOrLink>
           <ButtonOrLink label="Activities" href="/activities" type="a"><NotepadSVG /></ButtonOrLink>
+        </section>
+        <hr class="border-2" />
+        <section class="flex flex-col gap-4 w-full">
+          <ButtonOrLink label="Task" href="/task" type="a"><TaskSVG /></ButtonOrLink>
         </section>
         <hr class="border-2" />
       </div>
