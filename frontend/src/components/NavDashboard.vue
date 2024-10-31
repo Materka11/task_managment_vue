@@ -13,6 +13,8 @@ import MessageSVG from "@/assets/icons/MessageSVG.vue"
 import NotepadSVG from "@/assets/icons/NotepadSVG.vue"
 import PlusCircleFillSVG from "@/assets/icons/PlusCircleFillSVG.vue"
 import TaskSVG from "@/assets/icons/TaskSVG.vue"
+import GroupSVG from "@/assets/icons/GroupSVG.vue"
+import GoalsSVG from "@/assets/icons/GoalsSVG.vue"
 
 const { user } = defineProps<{ user: IUser | null }>()
 const isMenuOpen = ref(false)
@@ -74,6 +76,8 @@ const toggleMenu = () => {
         <hr class="border-2" />
         <section class="flex flex-col gap-4 w-full">
           <ButtonOrLink label="Task" href="/task" type="a"><TaskSVG /></ButtonOrLink>
+          <ButtonOrLink label="Team mate" href="/team-mate" type="a"><GroupSVG /></ButtonOrLink>
+          <ButtonOrLink label="Goals" href="/goals" type="a"><GoalsSVG /></ButtonOrLink>
         </section>
         <hr class="border-2" />
       </div>
