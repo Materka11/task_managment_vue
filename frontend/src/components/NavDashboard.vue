@@ -15,6 +15,7 @@ import PlusCircleFillSVG from "@/assets/icons/PlusCircleFillSVG.vue"
 import TaskSVG from "@/assets/icons/TaskSVG.vue"
 import GroupSVG from "@/assets/icons/GroupSVG.vue"
 import GoalsSVG from "@/assets/icons/GoalsSVG.vue"
+import ProjectSVG from "@/assets/icons/ProjectSVG.vue"
 
 const { user } = defineProps<{ user: IUser | null }>()
 const isMenuOpen = ref(false)
@@ -78,6 +79,10 @@ const toggleMenu = () => {
           <ButtonOrLink label="Task" href="/task" type="a"><TaskSVG /></ButtonOrLink>
           <ButtonOrLink label="Team mate" href="/team-mate" type="a"><GroupSVG /></ButtonOrLink>
           <ButtonOrLink label="Goals" href="/goals" type="a"><GoalsSVG /></ButtonOrLink>
+        </section>
+        <hr class="border-2" />
+        <section class="flex flex-col gap-4 w-full">
+          <ButtonOrLink label="Project" href="/project" type="a"><ProjectSVG /></ButtonOrLink>
         </section>
         <hr class="border-2" />
       </div>
