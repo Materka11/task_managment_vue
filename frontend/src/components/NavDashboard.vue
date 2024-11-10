@@ -7,6 +7,18 @@ import BellSVG from "@/assets/icons/BellSVG.vue"
 import ShortProfile from "./ShortProfile.vue"
 import { ref } from "vue"
 import HamburgerButton from "./HamburgerButton.vue"
+import ButtonOrLink from "./ButtonOrLink.vue"
+import HomeSVG from "@/assets/icons/HomeSVG.vue"
+import MessageSVG from "@/assets/icons/MessageSVG.vue"
+import NotepadSVG from "@/assets/icons/NotepadSVG.vue"
+import PlusCircleFillSVG from "@/assets/icons/PlusCircleFillSVG.vue"
+import TaskSVG from "@/assets/icons/TaskSVG.vue"
+import GroupSVG from "@/assets/icons/GroupSVG.vue"
+import GoalsSVG from "@/assets/icons/GoalsSVG.vue"
+import ProjectSVG from "@/assets/icons/ProjectSVG.vue"
+import SettingsSVG from "@/assets/icons/SettingsSVG.vue"
+import HelpSVG from "@/assets/icons/HelpSVG.vue"
+import LogOutSVG from "@/assets/icons/LogOutSVG.vue"
 
 const { user } = defineProps<{ user: IUser | null }>()
 const isMenuOpen = ref(false)
@@ -48,10 +60,46 @@ const toggleMenu = () => {
         />
         <HamburgerButton :is-menu-open="isMenuOpen" :toggleMenu="toggleMenu" />
       </div>
-      <AddButton label="Create Task" :handle-click="() => {}" />
-      <ActionButton :handle-click="() => {}"
-        ><BellSVG /> <span class="font-bold">Notification</span></ActionButton
-      >
+      <div class="flex flex-col gap-10 w-full py-10">
+        <section class="flex flex-col gap-4 w-full">
+          <ButtonOrLink label="Create Task" :handle-click="() => {}" type="button"
+            ><PlusCircleFillSVG
+          /></ButtonOrLink>
+          <ButtonOrLink label="Notification" :handle-click="() => {}" type="button"
+            ><BellSVG />
+          </ButtonOrLink>
+        </section>
+        <hr class="border-2" />
+        <section class="flex flex-col gap-4 w-full">
+          <ButtonOrLink label="Home" href="/home" type="a"><HomeSVG /></ButtonOrLink>
+          <ButtonOrLink label="Message" href="/message" type="a"
+            ><MessageSVG class="stroke-gray-500 group-hover:stroke-blue-500"
+          /></ButtonOrLink>
+          <ButtonOrLink label="Activities" href="/activities" type="a"><NotepadSVG /></ButtonOrLink>
+        </section>
+        <hr class="border-2" />
+        <section class="flex flex-col gap-4 w-full">
+          <ButtonOrLink label="Task" href="/task" type="a"><TaskSVG /></ButtonOrLink>
+          <ButtonOrLink label="Team mate" href="/team-mate" type="a"><GroupSVG /></ButtonOrLink>
+          <ButtonOrLink label="Goals" href="/goals" type="a"><GoalsSVG /></ButtonOrLink>
+        </section>
+        <hr class="border-2" />
+        <section class="flex flex-col gap-4 w-full">
+          <ButtonOrLink label="Project" href="/project" type="a"><ProjectSVG /></ButtonOrLink>
+        </section>
+        <hr class="border-2" />
+        <section class="flex flex-col gap-4 w-full">
+          <ButtonOrLink label="Settings" href="/settings" type="a"><SettingsSVG /></ButtonOrLink>
+          <ButtonOrLink label="Help" href="/help" type="a"><HelpSVG /></ButtonOrLink>
+          <ButtonOrLink
+            label="Log Out"
+            href="/Logout"
+            type="a"
+            class-name="text-red-500 stroke-red-500"
+            ><LogOutSVG
+          /></ButtonOrLink>
+        </section>
+      </div>
     </div>
   </nav>
 </template>
